@@ -15,8 +15,9 @@ function Search ({ historyArr, setHistoryArr }){
     }
 
     return(
-        <div onSubmit={(e)=>query(e)}>
-            <form>
+        <div>
+            <h3>Search News</h3>
+            <form onSubmit={(e)=>query(e)}>
                 Search: <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Type to Search..."></input>
                 <input type="submit" value="Submit"></input>
             </form>

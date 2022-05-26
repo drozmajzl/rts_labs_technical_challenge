@@ -3,7 +3,12 @@
 function History ({ historyArr, setHistoryArr, accessHistory }){
 
     
-    const searchHistory = historyArr.map((s, index)=><div key={index}><p style={{color: "blue", textDecoration: "underline"}} onClick={()=>accessHistory(s.keyword, s.url, s.filter)}>{s.filter !== "none" ? `${s.keyword} (Filtered Search)` : s.keyword}</p><p>{s.date}</p><hr></hr></div>)
+    const searchHistory = historyArr.map((s, index)=>
+        <div key={index}>
+            <p className="history-item" style={{color: "blue", textDecoration: "underline"}} onClick={()=>accessHistory(s.keyword, s.url, s.filter)}>{s.filter !== "none" ? `${s.keyword} (Filtered Search)` : s.keyword}</p>
+            <p>{s.date}</p>
+            <hr></hr>
+        </div>)
 
     return(
         <div>

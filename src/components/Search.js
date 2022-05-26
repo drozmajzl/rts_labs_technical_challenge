@@ -29,7 +29,6 @@ function Search ({ historyArr, setHistoryArr, search, setSearch, currentSearch, 
         if (h._highlightResult.story_text){
             text = h._highlightResult.story_text.value.replace(/&quot;/g, '"')
         }
-        
         return(
             <div key={index}>
             <a href={h.url}>{h.title}</a>

@@ -15,7 +15,11 @@ function App() {
   const [searchURL, setSearchURL] = useState("")
   const [filter, setFilter]=useState("none")
   let navigate = useNavigate()
-  const home = <h3>Hacker News Search App</h3>
+  const home = 
+    <div>
+      <h3>Hacker News Search App</h3>
+      <p>Navigate to search the Hacker News Algolia API!</p>
+    </div>
 
   function query(e){
     e.preventDefault();
@@ -34,7 +38,7 @@ function App() {
         .then((data) => setFetchData(data))
         .then(cleanup(`http://hn.algolia.com/api/v1/search?query=${search}${filter}&page=`, search, filter))
     }
-}
+  }
 
   function accessHistory(keyword, url, searchFilter){
     navigate('/search')
@@ -49,22 +53,36 @@ function App() {
         cleanup(`${url}`, `${keyword}`, searchFilter)
   }
 
-function cleanup(historyURL, key, searchFilter){
-  let yourDate = new Date()
-    const historyObj = {keyword: key, url: historyURL, filter: searchFilter, date: (yourDate.toISOString().split('T')[0])}
-    setHistoryArr([...historyArr, historyObj])
-    console.log(historyObj)
-    setCurrentSearch(key)
-    setSearch("")
-    setFilter("none")
-}
+  function cleanup(historyURL, key, searchFilter){
+      let yourDate = new Date()
+      const historyObj = {keyword: key, url: historyURL, filter: searchFilter, date: (yourDate.toISOString().split('T')[0])}
+      setHistoryArr([historyObj, ...historyArr])
+      console.log(historyObj)
+      setCurrentSearch(key)
+      setSearch("")
+      setFilter("none")
+  }
 
   return (
     <div className="App">
       <NavBar />
       <Routes>
-      <Route path="/" element={home} />
-        <Route path="/search" element={<Search historyArr={historyArr} setHistoryArr={setHistoryArr} search={search} setSearch={setSearch} currentSearch={currentSearch} setCurrentSearch={setCurrentSearch} fetchData={fetchData} setFetchData={setFetchData} pageNum={pageNum} setPageNum={setPageNum} searchURL={searchURL} setSearchURL={setSearchURL} filter={filter} setFilter={setFilter} query={query}/>} />
+        <Route path="/" element={home} />
+        <Route path="/search" element={<Search historyArr={historyArr} 
+                                               setHistoryArr={setHistoryArr} 
+                                               search={search} 
+                                               setSearch={setSearch} 
+                                               currentSearch={currentSearch} 
+                                               setCurrentSearch={setCurrentSearch} 
+                                               fetchData={fetchData} 
+                                               setFetchData={setFetchData} 
+                                               pageNum={pageNum} 
+                                               setPageNum={setPageNum} 
+                                               searchURL={searchURL} 
+                                               setSearchURL={setSearchURL} 
+                                               filter={filter} 
+                                               setFilter={setFilter} 
+                                               query={query}/>} />
         <Route path="/history" element={<History historyArr={historyArr} setHistoryArr={setHistoryArr} accessHistory={accessHistory}/>} />
       </Routes>
     </div>
